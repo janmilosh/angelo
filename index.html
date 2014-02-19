@@ -8,23 +8,34 @@
 </head>
 <body>
 	<div ng-controller="MainCtrl">
-		<div class="container">
+		<div class="container-fluid">
 			<div class="row">
-				<div class="col-xs-4 sidebar-content">
-					<h2>Stories</h2>
+				<div class="col-sm-4 sidebar-content">
+					<div class="row">
+						<h2 class="col-xs-9">Stories</h2>
+						<div class="col-xs-3">
+							<button ng-click="createStory()" type="button" class="btn btn-primary pull-right"><i class="glyphicon glyphicon-plus"></i></button>
+						</div>
+					</div>
 					<div class="story"
 						ng-repeat="story in stories"
 						ng-click="setCurrentStory(story)">
 						<h4>{{story.title}}</h4>
+						<p>{{story.status}}</p>
+						<p>{{story.type}}</p>
 						<p>{{story.description}}</p>
+						<p>{{story.criteria}}</p>
+						<p>{{story.reporter}}</p>
+						<p>{{story.assignee}}</p>
 					</div>
 				</div>
-				<div class="col-xs-6 body-content">
+				<div class="col-sm-6 body-content">
 					<form class="form-horizontal">
 						<div class="form-group">
-							<label class="col-xs-2 control-label" for="inputTitle">Title</label>
-							<div class="col-xs-10">
+							<label class="col-sm-3 control-label" for="inputTitle">Title</label>
+							<div class="col-sm-9">
 								<input
+									id="inputTitle"
 									class="form-control"
 									type="text"
 									placeholder="Title"
@@ -32,8 +43,28 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="col-xs-2 control-label" for="inputDescription">Description</label>
-							<div class="col-xs-10">
+							<label class="col-sm-3 control-label" for="inputStatus">Status</label>
+							<div class="col-sm-9">
+								<select
+									class="form-control"
+									id="inputStatus"
+									ng-model="currentStatus"
+									ng-options="s.name for s in statuses"><option value="">Status</option></select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label" for="inputType">Type</label>
+							<div class="col-sm-9">
+								<select
+									class="form-control"
+									id="inputType"
+									ng-model="currentType"
+									ng-options="t.name for t in types"><option value="">Type</option></select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label" for="inputDescription">Description</label>
+							<div class="col-sm-9">
 								<textarea id="inputDescription"
 									class="form-control"
 									rows="3"
@@ -42,9 +73,38 @@
 								</textarea>
 							</div>
 						</div>
-						<br>
-						<div class="col-xs-offset-2">
-							<button ng-click="createStory()" type="button" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i></button>
+						<div class="form-group">
+							<label class="col-sm-3 control-label" for="inputAcceptance">Acceptance Criteria</label>
+							<div class="col-sm-9">
+								<textarea id="inputAcceptance"
+									class="form-control"
+									rows="3"
+									placeholder="Acceptance Criteria"
+									ng-model="currentStory.criteria">
+								</textarea>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label" for="inputReporter">Reporter</label>
+							<div class="col-sm-9">
+								<input
+									id="inputReporter"
+									class="form-control"
+									type="text"
+									placeholder="Reporter"
+									ng-model="currentStory.reporter">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label" for="inputAssignee">Assignee</label>
+							<div class="col-sm-9">
+								<input
+									id="inputAssignee"
+									class="form-control"
+									type="text"
+									placeholder="Assignee"
+									ng-model="currentStory.assignee">
+							</div>
 						</div>	
 					</form>
 				</div>
